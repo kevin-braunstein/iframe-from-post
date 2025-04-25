@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Iframe Content</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <h2>Data Received in Iframe</h2>
+  <div id="dataDisplay"></div>
+
+  <script>
+    // Get the form data from the URL (simulating server-side processing)
+    function getFormData() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const formData = {};
+      for (const [key, value] of urlParams) {
+        formData[key] = value;
+      }
+      return formData;
+    }
+
+    // Display the data in the iframe
+    function displayData(data) {
+      const dataDisplay = document.getElementById('dataDisplay');
+      if (data.name && data.message) {
+        dataDisplay.innerHTML = `
+          <p><strong>Name:</strong> ${data.name}</p>
+          <p><strong>Message:</strong> ${data.message}</p>
+        `;
+      } else {
+        dataDisplay.innerHTML = "<p>No data received.</p>";
+      }
+    }
+
+    // Simulate server-side processing and display the data
+    const formData = getFormData();
+    displayData(formData);
+  </script>
+</body>
+</html>
